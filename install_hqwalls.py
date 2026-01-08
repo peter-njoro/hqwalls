@@ -4,6 +4,12 @@ from pathlib import Path
 import subprocess
 import sys
 import shutil
+import os
+
+# Read Telegram credentials from environment variables
+TELEGRAM_API_ID = os.environ.get("HQWALLS_TELEGRAM_API_ID", "123456")  # default fallback
+TELEGRAM_API_HASH = os.environ.get("HQWALLS_TELEGRAM_API_HASH", "abcdef123456...")  # default fallback
+
 
 # Paths
 HOME = Path.home()
@@ -31,7 +37,20 @@ girls = true
 fantasy-girls = true
 cute = true
 cartoons = true
+
+TELEGRAM_SECTION = f"""
+[telegram]
+enabled = true
+api_id = {TELEGRAM_API_ID}
+api_hash = "{TELEGRAM_API_HASH}"
+channels_enabled = true
 """
+
+
+"""
+
+
+print("[+] Telegram section added to config.toml (from environment variables)")
 
 SERVICE_CONTENT = f"""[Unit]
 Description=HQWalls GNOME Wallpaper Rotator
