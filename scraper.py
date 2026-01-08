@@ -3,11 +3,17 @@ from urllib.parse import urljoin
 
 def extract_wallpaper_pages(html, base_url):
     soup = BeautifulSoup(html, "html.parser")
-    links = []
+    links = set()
 
-    for a in soup.select("a[href*='wallpaper']"):
+    # hdqwalls wallpaper cards
+    for a in soup.select("a[href]"):
         href = a.get("href")
-        if href and isinstance(href, str) and href.startswith("/"):
-            links.append(urljoin(base_url, href))
 
-    return list(set(links))
+        # valid wallpaper pages look like /category/id-name
+        if href and href.count("/") >= 2 and not href.endswith(".jpg"):
+            if href and isinstance(href, str) and href.startswith("/"):
+                full = urljoin(base_url, href)
+                links.add(full)
+
+    return list(links)
+

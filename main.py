@@ -1,8 +1,8 @@
 from constants import CATEGORY_URLS, WALLPAPER_DIR
 from config import load_config
-from http import HTTPSession
+from http_client import HTTPSession
 from scraper import extract_wallpaper_pages
-from .license_filter import is_hdqwalls_owned
+from license_filter import is_hdqwalls_owned
 from images import extract_image_url
 from downloader import download_image
 from pathlib import Path
